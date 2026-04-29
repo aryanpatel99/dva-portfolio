@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import Image from 'next/image';
 import {
   Terminal, Code, GraduationCap,
-  ArrowDown, Mail, Copy, Check, LayoutDashboard, Briefcase
+  ArrowDown, Mail, Copy, Check, Briefcase, ExternalLink
 } from 'lucide-react';
 import s from './page.module.css';
 
@@ -83,15 +84,40 @@ function GlowCard({ children, className }: { children: React.ReactNode; classNam
   );
 }
 
-/* ═══ Project Placeholder ═══ */
-function ProjectPlaceholder({ label }: { label: string }) {
+/* ═══ Image Gallery ═══ */
+function ImageGallery({ images }: { images: { src: string; alt: string }[] }) {
+  const [active, setActive] = useState(0);
   return (
-    <div className={s.projPlaceholder}>
-      <div className={s.phIcon}><LayoutDashboard size={28} /></div>
-      <span className={s.phLabel}>{label}</span>
+    <div className={s.gallery}>
+      <div className={s.galleryMain}>
+        {images.map((img, i) => (
+          <Image key={img.src} src={img.src} alt={img.alt} fill
+            sizes="(max-width: 768px) 100vw, 1100px"
+            className={i === active ? s.imgActive : s.imgHidden}
+            priority={i === 0} />
+        ))}
+      </div>
+      <div className={s.thumbStrip}>
+        {images.map((img, i) => (
+          <button key={img.src}
+            className={`${s.thumb} ${i === active ? s.thumbOn : ''}`}
+            onClick={() => setActive(i)}
+            aria-label={`View ${img.alt}`}>
+            <Image src={img.src} alt="" width={56} height={56} />
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
+
+/* ═══ Blinkit images ═══ */
+const blinkitImages = [
+  { src: '/images/blinkit-1.png', alt: 'Market Pulse — Revenue Mix & SKU Pareto' },
+  { src: '/images/blinkit-2.png', alt: 'Where Impulse Lives — Category Breakdown' },
+  { src: '/images/blinkit-3.png', alt: 'Pack Price Ladder — Convenience Premium' },
+  { src: '/images/blinkit-4.png', alt: 'Geography & Promo Analysis — City Impulse' },
+];
 
 /* ═══ Copy Email Button ═══ */
 function CopyEmail() {
@@ -255,53 +281,77 @@ export default function Home() {
         <div ref={projHdr} className={`${s.secHead} reveal`}>
           <span className={s.label}>Work</span>
           <h2 className={s.secTitle}>Data Visualization Projects</h2>
-          <p className={s.secSub}>Capstone projects turning complex datasets into actionable insights — details coming soon.</p>
+          <p className={s.secSub}>Capstone projects turning complex datasets into actionable insights.</p>
         </div>
 
-        {/* Project Placeholder 1 */}
+        {/* Project 1 — Retail Profitability */}
         <article ref={p1} className={`${s.proj} reveal`}>
-          <ProjectPlaceholder label="Project coming soon" />
+          <div className={s.projImg} style={{ background: '#b8c8e8' }}>
+            <Image src="/images/retail-dashboard.png" alt="Retail Profitability & Margin Optimization Dashboard" fill
+              sizes="(max-width: 768px) 100vw, 1100px" style={{ objectFit: 'cover' }} priority />
+          </div>
           <div className={s.projBody}>
-            <span className={s.projTag}>Coming Soon</span>
-            <h3 className={s.projTitle}>Project Title — TBD</h3>
+            <span className={s.projTag}>Retail · Capstone 1</span>
+            <h3 className={s.projTitle}>Retail Profitability &amp; Margin Optimization Dashboard</h3>
             <p className={s.projDesc}>
-              Details about this project will be added shortly. Check back for a full write-up including methodology, key findings, and interactive dashboard links.
+              End-to-end analysis of ~9,800 US retail transactions to uncover patterns in profitability, regional performance,
+              category-level margins, and shipping efficiency — delivered as an interactive Excel dashboard for business stakeholders.
             </p>
+            <div className={s.projLinks}>
+              <a href="https://docs.google.com/spreadsheets/d/1eI8eT-lTITb30jTpvw0EvFOd2hQksZV_RVYjujOPWew/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className={s.projLink}>
+                <ExternalLink size={13} /> View Dashboard
+              </a>
+              <a href="https://docs.google.com/document/d/1irLA_jXtsgEpZnzh0xRmhwhzpkpY8BP_tJ3v2AU9rkk/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className={s.projLink}>
+                <ExternalLink size={13} /> Full Report
+              </a>
+            </div>
             <div className={s.kpis}>
-              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 1</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 2</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 3</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 4</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>9,800</span><span className={s.kpiLbl}>Transactions</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>$2.28M</span><span className={s.kpiLbl}>Total Sales</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>4</span><span className={s.kpiLbl}>US Regions</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>3</span><span className={s.kpiLbl}>Categories</span></div>
             </div>
           </div>
         </article>
 
-        {/* Project Placeholder 2 */}
+        {/* Project 2 — The Unplanned Basket */}
         <article ref={p2} className={`${s.proj} reveal`}>
-          <ProjectPlaceholder label="Project coming soon" />
+          <ImageGallery images={blinkitImages} />
           <div className={s.projBody}>
-            <span className={s.projTag}>Coming Soon</span>
-            <h3 className={s.projTitle}>Project Title — TBD</h3>
+            <span className={s.projTag}>Quick Commerce · Capstone 2</span>
+            <h3 className={s.projTitle}>The Unplanned Basket — Blinkit Impulse Analysis</h3>
             <p className={s.projDesc}>
-              Details about this project will be added shortly. Check back for a full write-up including methodology, key findings, and interactive dashboard links.
+              Impulse-proxy scoring model across 13,000 SKUs in 10 Indian cities — quantifying what share of Blinkit&apos;s
+              revenue is planned necessity vs unplanned convenience, and pricing the 6× premium consumers pay for small-pack formats.
             </p>
+            <div className={s.projLinks}>
+              <a href="https://public.tableau.com/app/profile/aryan.patel8829/viz/Blinkit_Analysis_G19/Dashboard2" target="_blank" rel="noopener noreferrer" className={s.projLink}>
+                <ExternalLink size={13} /> Tableau Dashboard
+              </a>
+            </div>
             <div className={s.kpis}>
-              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 1</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 2</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 3</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 4</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>13,000</span><span className={s.kpiLbl}>SKUs Analysed</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>21.6%</span><span className={s.kpiLbl}>Impulse Share</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>6×</span><span className={s.kpiLbl}>Convenience Premium</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>₹509M</span><span className={s.kpiLbl}>Total Revenue</span></div>
             </div>
           </div>
         </article>
       </section>
 
-      {/* ═══ HELLO ═══ */}
-      <section ref={helloRef} className={`${s.hello} reveal`}>
-        <div className={s.helloDot} />
-        <h2 className={s.helloTitle}>hello?</h2>
-        <p className={s.helloSub}>If you&apos;ve made it this far, let&apos;s talk.</p>
-        <CopyEmail />
-        <div className={s.socialGrid}>
+      {/* ═══ CONTACT ═══ */}
+      <section ref={helloRef} className={`${s.contact} reveal`}>
+        <div className={s.contactLeft}>
+          <span className={s.label}>Contact</span>
+          <h2 className={s.contactTitle}>Let&apos;s build<br />something together.</h2>
+          <p className={s.contactSub}>
+            Open to internships, collaborations, and full-time roles.
+            Whether it&apos;s a project idea or just a chat — my inbox is always open.
+          </p>
+          <CopyEmail />
+        </div>
+        <div className={s.contactRight}>
+          <div className={s.socialGrid}>
           <a href="https://github.com/aryanpatel99" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
             <span className={s.socialIcon}><GithubIcon size={16} /></span>
             <span className={s.socialLabel}>GITHUB</span>
@@ -342,6 +392,7 @@ export default function Home() {
             <span className={s.socialLabel}>EMAIL</span>
             <span className={s.socialHandle}>aryan.patel2024</span>
           </a>
+          </div>
         </div>
       </section>
 
