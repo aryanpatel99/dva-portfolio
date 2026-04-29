@@ -1,0 +1,226 @@
+--- Final Project Report ---
+Maternal & Newborn Health Insights During COVID -19 Data Visualization & Analytics | Group 6 | 2026  
+Pregnancy during the COVID-19 Pandemic (PdP) — Data Analytics Capstone 
+ 
+ 
+D A T A  V I S U A L I Z A T I O N  &  A N A L Y T I C S   ·   
+G R O U P  6   ·   2 0 2 6  
+ 
+Data-Driven Analysis of Canadian 
+Pregnancy Outcomes 
+During the Pandemic 
+ 
+Sector: Healthcare — Maternal & Child Health 
+ 
+ 
+ 
+T E A M  M E M B E R S  
+Abhyanth K  ·  2401010012  —  Project 
+Lead 
+Jagruthi Pulamati  ·  2401010196  —  
+Analysis Lead 
+Akhil Nath Reddy  ·  2401010052  —  
+Data Lead 
+Vanshika Yadav  ·  2401010496  —  
+Dashboard Lead 
+Kabir Sharma  ·  2401010205  —  PPT & 
+Quality Lead 
+A C A D E M I C  
+D E T A I L S  
+Faculty Advisor 
+Prof. Archit Raj 
+Course 
+Data Visualization & 
+Analytics 
+Group 
+Group 6 
+S U B M I S S I O N  
+D A T E  
+18 
+February 2026 
+Group 6 
+ 
+ 
+  Maternal & Newborn Health Insights During COVID -19 Data Visualization & Analytics | Group 6 | 2026  
+Pregnancy during the COVID-19 Pandemic (PdP) — Data Analytics Capstone 
+2. Executive Summary 
+ 
+Problem Statement 
+The COVID-19 pandemic created unprecedented psychosocial stressors for pregnant individuals 
+worldwide. Elevated anxiety, depression, and fear of virus transmission posed significant risks to both 
+maternal mental health and neonatal outcomes. Understanding how pandemic-related stress influenced 
+birth outcomes is critical for informing public health preparedness and prenatal care policies. 
+ 
+Approach 
+This project presents an analysis of survey-based data from the Pregnancy during the COVID-19 
+Pandemic (PdP) study conducted across Canada. The dataset comprised 10,773 records from 
+pregnant individuals, capturing maternal demographics, mental health assessments (EPDS, PROMIS 
+Anxiety), pandemic stress perceptions, and birth outcomes including birth weight, birth length, and 
+NICU stay. 
+ 
+Data was cleaned and transformed in Google Sheets, reducing the dataset to 5,389 high-quality 
+records by removing incomplete entries and deriving additional analytical columns. Analysis included 
+KPI development, exploratory data analysis, pivot-table-based segmentation, and interactive dashboard 
+creation. 
+ 
+Key Performance Indicators 
+ 
+29.4% 
+C-Section Rate 
+vs. 21% global avg 
+51.5/100 
+Avg Pandemic Stress 
+Composite threat score 
+18.4/35 
+Avg PROMIS Anxiety 
+Clinically significant 
+9.75/30 
+Avg EPDS Score 
+Approaching clinical threshold 
+3,415 g 
+Avg Birth Weight 
+Within healthy range 
+525 (9.7%) 
+NICU Admissions 
+Of total deliveries 
+ 
+Key Insights 
+• High C-Section Rate: The delivery mode distribution shows a Cesarean section rate of 29.36%, 
+significantly above the global average of approximately 21%. 
+• Average maternal anxiety scored 18.43/35, indicating moderate-to-high anxiety prevalence across 
+the population — a clinically significant level. Maternal & Newborn Health Insights During COVID -19 Data Visualization & Analytics | Group 6 | 2026  
+Pregnancy during the COVID-19 Pandemic (PdP) — Data Analytics Capstone 
+• Pandemic stress averaged 51.53/100, with perceived threat to the unborn baby being consistently 
+the highest driver of stress scores. 
+• Higher-income and higher-education groups showed measurably lower rates of severe postnatal 
+depression, confirming the role of socioeconomic protective factors. 
+• Maternal age emerged as a significant predictor of preterm birth, with younger and older maternal 
+age groups both showing elevated risk — a U-shaped risk curve. 
+ 
+Key Recommendations 
+• Targeted Mental Health Support: Implement screening and support programs specifically for 
+expecting mothers, focusing on those with lower income or higher anxiety scores. 
+• C-Section Awareness: Investigate the drivers of the elevated C-section rate and promote 
+educational and support interventions for natural birth where clinically safe. 
+• Resource Allocation: Direct additional healthcare resources toward vulnerable demographics 
+identified in the analysis, particularly specific age groups and lower-income brackets. 
+ 
+  Maternal & Newborn Health Insights During COVID -19 Data Visualization & Analytics | Group 6 | 2026  
+Pregnancy during the COVID-19 Pandemic (PdP) — Data Analytics Capstone 
+3. Sector & Business Context 
+ 
+Sector Overview 
+The maternal and child health (MCH) sector is a vital component of public health. In Canada, 
+approximately 350,000–380,000 births occur each year, supported by a wide network of prenatal, 
+obstetric, neonatal, and mental health services. This sector accounts for substantial healthcare 
+spending, with NICU care costing approximately CAD $2,000–$3,500 per infant per day. 
+Source: NICU Cost Reference — https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3203691/ 
+ 
+Current Challenges 
+• Mental Health Strain: Around 15–20% of pregnant individuals experience perinatal depression or 
+anxiety, a burden worsened considerably by COVID-19. 
+Source: Perinatal Mental Health Statistics — https://www.who.int/news-room/fact-sheets/detail/mental-health-in-the-workplace 
+• Health Inequities: Socioeconomic disparities continue to significantly affect maternal and neonatal 
+outcomes across income and education strata. 
+Source: Health Inequities in Maternal Care — https://www.canada.ca/en/public-health/services/publications/healthy-
+living/perinatal-health-indicators-canada-2017.html 
+• Data Gaps: Psychosocial stress data is rarely integrated into clinical care despite its proven 
+impact on birth outcomes, representing a critical gap in standard prenatal protocols. 
+Source: PdP Study — Psychosocial Data Integration — https://www.pdp-pdc.ca/en 
+• Pandemic Readiness: Health systems were broadly underprepared for the indirect impacts of 
+COVID-19 on pregnant populations, underscoring the need for proactive frameworks. 
+Source: COVID-19 & Pregnancy Outcomes — https://www.thelancet.com/journals/laneur/article/PIIS1474-4422(20)30065-
+7/fulltext 
+ 
+Why This Problem Was Chosen 
+The link between pandemic-related stress and pregnancy outcomes remains underexplored in 
+mainstream clinical literature. By examining how psychological stress affects outcomes such as 
+preterm birth, low birth weight, and NICU admissions, this analysis offers actionable insights for 
+policymakers, healthcare providers, and researchers focused on maternal care and long-term child 
+development. 
+ 
+  Maternal & Newborn Health Insights During COVID -19 Data Visualization & Analytics | Group 6 | 2026  
+Pregnancy during the COVID-19 Pandemic (PdP) — Data Analytics Capstone 
+4. Problem Statement & Objectives 
+ 
+Formal Problem Definition 
+To analyze and quantify the impact of COVID-19-related psychosocial stressors on pregnant individuals 
+and their birth outcomes, using survey-based data from the Pregnancy during the COVID-19 Pandemic 
+(PdP) project, and to derive actionable insights for improving maternal and neonatal care during public 
+health emergencies. 
+ 
+Project Scope 
+ 
+Dimension Scope 
+Geographic Canada 
+Temporal Pregnancies and deliveries during the COVID-19 pandemic period 
+Population Pregnant individuals enrolled in the PdP study 
+Variables Maternal demographics, mental health scores, pandemic stress perception, 
+birth outcomes 
+Analysis Descriptive statistics, cross-tabulation, trend analysis, segmentation, and 
+dashboard visualization 
+Tools Google Sheets (cleaning, pivot tables, calculations, dashboards) 
+ 
+  
+
+--- Report ---
+P R O J E C T  R E P O R T  ·  2 0 2 6 · ·  · C O N F I D E N T I A L  —  F O R  A C A D E M I C  R E V I E W
+B a n k i n g  &  F i n a n c i a l  S e r v i c e s
+Bank Marketing
+Campaign Analytics
+Optimising term-deposit conversion through customer, campaign
+&  macro-economic  analytics  —  across  41,176  direct-marketing
+contacts. 
+41,176
+C O N T A C T S  A N A L Y S E D
+11.27%
+B A S E L I N E  C O N V E R S I O N
+6.9×
+T O P - D R I V E R  L I F T
+P R O J E C T
+Bank Marketing Campaign Analytics
+UCI Portuguese Bank Dataset
+S E C T O R
+Banking & Financial Services
+Retail · Direct Marketing
+G R O U P
+Group — 11
+S U B M I S S I O N
+29 April 2026
+T E A M  M E M B E R S
+01 Abhayanth K 02 Kasula Lalithendra
+03 Jagruthi Pulumati 04 Sachin Jaiswal
+05 Ankit Raj Singh 06 Varun Sharma
+F A C U L T Y  M E N T O R
+Mr. Archit Raj
+I N S T I T U T E
+Rishihood University
+BMC O N T E N T S
+Table of Contents
+01 Executive Summary 04
+02 Sector & Business Context 06
+03 Problem Statement & Objectives 07
+04 Data Description 09
+05 Cleaning & Transformation 11
+06 KPI Framework 13
+07 Exploratory Analysis 16
+08 Statistical Analysis 19
+09 Dashboard Walkthrough 22
+10 Key Insights 28
+11 Business Recommendations 30
+12 Limitations & Next Steps 32
+13 Contribution Matrix 33
+BANK MARKETING CAMPAIGN · PROJECT REPORT GROUP — 11
+UCI Bank Marketing Dataset 02I
+BANK MARKETING CAMPAIGN · PROJECT REPORT GROUP — 11
+P a r t  I
+Foundation
+Setting  the  strategic  ground  —  the  sector,  the
+business problem, and the analytical objectives that
+define the rest of this work.
+01 Executive Summary
+02 Sector & Business Context
+03 Problem Statementlightweight propensity model on the six features identified by the logistic-regression step (90.8%
+accuracy on the cleaned dataset).
+BANK MARKETING CAMPAIGN · PROJECT REPORT GROUP — 11
+UCI Bank Marketing Dataset 05
