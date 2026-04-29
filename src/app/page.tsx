@@ -151,9 +151,9 @@ export default function Home() {
           </span>
           <h1 className={s.heroTitle}>Abhayanth K.</h1>
           <p className={s.heroSub}>
-            AI engineer building multi-agent pipelines, workflow engines,
-            and full-stack platforms. Deep focus on agentic AI,
-            statistical modeling & production reliability.
+            I build AI-powered dashboards and data-driven systems using Next.js,
+            TypeScript, Python, and Tableau, turning complex datasets into
+            clear, actionable insights.
           </p>
           <div className={s.heroBtns}>
             <a href="#projects" className={s.btnPrimary}>
@@ -176,7 +176,9 @@ export default function Home() {
         <div ref={aboutHdr} className={`${s.secHead} reveal`}>
           <span className={s.label}>Profile</span>
           <h2 className={s.secTitle}>Engineering Background</h2>
-          <p className={s.secSub}>Data Visualization & Analytics · Full-Stack AI</p>
+          <p className={s.secSub}>
+            I build AI-powered dashboards and data-driven systems using Next.js, TypeScript, Python, and Tableau, turning complex datasets into clear, actionable insights. Alongside full-stack development, I work extensively with Tableau, spreadsheets, and exploratory data analysis (EDA) to clean, analyze, and visualize data for decision-making.
+          </p>
         </div>
 
         <div ref={aboutCards} className={`${s.grid3} stagger`}>
@@ -188,7 +190,7 @@ export default function Home() {
           <GlowCard>
             <div className={s.cardIcon}><Code size={18} /></div>
             <span className={s.cardLabel}>Problem Solving</span>
-            <span className={s.cardBody}>1,900+ problems solved. CF Specialist (max 1484). LC 547.</span>
+            <span className={s.cardBody}>1,900+ problems solved. CF Specialist (1484). LC 547. Bringing strong analytical thinking.</span>
           </GlowCard>
           <GlowCard>
             <div className={s.cardIcon}><GraduationCap size={18} /></div>
