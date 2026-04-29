@@ -2,10 +2,9 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import {
-  Terminal, Code, GraduationCap, ExternalLink,
-  ArrowDown, Mail, Copy, Check
+  Terminal, Code, GraduationCap,
+  ArrowDown, Mail, Copy, Check, LayoutDashboard, Briefcase
 } from 'lucide-react';
-import Image from 'next/image';
 import s from './page.module.css';
 
 /* ── Brand SVG Icons ── */
@@ -21,15 +20,33 @@ const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+const LeetCodeIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
+  </svg>
+);
+
 const CodeforcesIcon = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
     <path d="M4.5 7.5A1.5 1.5 0 016 9v10.5a1.5 1.5 0 01-1.5 1.5h-3A1.5 1.5 0 010 19.5V9a1.5 1.5 0 011.5-1.5h3zm9-4.5A1.5 1.5 0 0115 4.5v15a1.5 1.5 0 01-1.5 1.5h-3A1.5 1.5 0 019 19.5v-15A1.5 1.5 0 0110.5 3h3zm9 7.5A1.5 1.5 0 0124 12v7.5a1.5 1.5 0 01-1.5 1.5h-3a1.5 1.5 0 01-1.5-1.5V12a1.5 1.5 0 011.5-1.5h3z"/>
   </svg>
 );
 
-const LeetCodeIcon = ({ size = 16 }: { size?: number }) => (
+const HackerRankIcon = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
+    <path d="M12 0c1.285 0 9.75 4.886 10.392 6 .645 1.115.645 10.885 0 12S13.287 24 12 24C10.715 24 2.25 19.114 1.608 18 .963 16.886.963 7.114 1.608 6 2.25 4.886 10.715 0 12 0zm2.205 6.015h-1.043c-.122 0-.208.037-.265.108-.06.074-.072.147-.072.243v1.73H10.63v-1.73c0-.096-.02-.169-.072-.243a.344.344 0 00-.265-.108H9.25a.344.344 0 00-.265.108c-.06.074-.072.147-.072.243v6.582c0 .096.02.169.072.243a.344.344 0 00.265.108h1.043c.122 0 .208-.037.265-.108.06-.074.072-.147.072-.243V11.07h2.2v1.877c0 .096.02.169.072.243a.344.344 0 00.265.108h1.043c.122 0 .208-.037.265-.108.06-.074.072-.147.072-.243V6.366c0-.096-.02-.169-.072-.243a.344.344 0 00-.265-.108z"/>
+  </svg>
+);
+
+const HackerEarthIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M22.65 0H1.35C.605 0 0 .605 0 1.35v21.3C0 23.395.605 24 1.35 24h21.3c.745 0 1.35-.605 1.35-1.35V1.35C24 .605 23.395 0 22.65 0zM12 18.3L5.7 12l2.1-2.1 4.2 4.2 8.4-8.4 2.1 2.1L12 18.3z"/>
+  </svg>
+);
+
+const CodeChefIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M11.257.004C5.026.253.035 5.433 0 11.668c-.032 5.769 4.091 10.657 9.608 11.618v-2.055c-4.108-.934-7.2-4.61-7.172-8.994.031-4.57 3.46-8.35 7.84-8.965v6.67H8.13a.37.37 0 00-.37.37v1.406c0 .204.166.37.37.37h1.147v3.95c0 .204.166.37.37.37h1.403c.204 0 .37-.166.37-.37v-3.95h1.03c.205 0 .37-.166.37-.37v-1.406a.37.37 0 00-.37-.37H11.42V3.295c4.268.71 7.55 4.435 7.55 8.93 0 4.29-3.05 7.908-7.096 8.88v2.065C17.63 22.202 21.6 17.384 21.6 11.665c0-6.317-4.96-11.48-11.205-11.662a11.63 11.63 0 00-.138-.001z"/>
   </svg>
 );
 
@@ -66,29 +83,12 @@ function GlowCard({ children, className }: { children: React.ReactNode; classNam
   );
 }
 
-/* ═══ Image Gallery ═══ */
-function ImageGallery({ images }: { images: { src: string; alt: string }[] }) {
-  const [active, setActive] = useState(0);
+/* ═══ Project Placeholder ═══ */
+function ProjectPlaceholder({ label }: { label: string }) {
   return (
-    <div className={s.gallery}>
-      <div className={s.galleryMain}>
-        {images.map((img, i) => (
-          <Image key={img.src} src={img.src} alt={img.alt} fill
-            sizes="(max-width: 768px) 100vw, 1100px"
-            className={i === active ? s.imgActive : s.imgHidden}
-            priority={i === 0} />
-        ))}
-      </div>
-      <div className={s.thumbStrip}>
-        {images.map((img, i) => (
-          <button key={img.src}
-            className={`${s.thumb} ${i === active ? s.thumbOn : ''}`}
-            onClick={() => setActive(i)}
-            aria-label={`View ${img.alt}`}>
-            <Image src={img.src} alt="" width={56} height={56} />
-          </button>
-        ))}
-      </div>
+    <div className={s.projPlaceholder}>
+      <div className={s.phIcon}><LayoutDashboard size={28} /></div>
+      <span className={s.phLabel}>{label}</span>
     </div>
   );
 }
@@ -96,7 +96,7 @@ function ImageGallery({ images }: { images: { src: string; alt: string }[] }) {
 /* ═══ Copy Email Button ═══ */
 function CopyEmail() {
   const [copied, setCopied] = useState(false);
-  const email = 'abhayanth.2024@nst.rishihood.edu.in';
+  const email = 'aryan.patel2024@nst.rishihood.edu.in';
   const copy = async () => {
     await navigator.clipboard.writeText(email);
     setCopied(true);
@@ -112,25 +112,18 @@ function CopyEmail() {
   );
 }
 
-/* ═══ Data ═══ */
-const bankImages = [
-  { src: '/images/project2-1.png', alt: 'Campaign Effectiveness' },
-  { src: '/images/project2-2.png', alt: 'Customer Profile' },
-  { src: '/images/project2-3.png', alt: 'Economic Impact' },
-  { src: '/images/project2-4.png', alt: 'Interaction History' },
-];
-
 /* ═══════════════════════════════════════════════════════ */
 /*                      PAGE                              */
 /* ═══════════════════════════════════════════════════════ */
 export default function Home() {
-  const aboutHdr = useReveal();
+  const aboutHdr  = useReveal();
   const aboutCards = useReveal();
-  const linksRef = useReveal();
-  const projHdr = useReveal();
-  const p1 = useReveal();
-  const p2 = useReveal();
-  const helloRef = useReveal();
+  const expRef    = useReveal();
+  const linksRef  = useReveal();
+  const projHdr   = useReveal();
+  const p1        = useReveal();
+  const p2        = useReveal();
+  const helloRef  = useReveal();
 
   return (
     <div className={s.page}>
@@ -147,19 +140,19 @@ export default function Home() {
         <div className={s.heroInner}>
           <span className={s.badge}>
             <span className={s.badgeDot} />
-            Available for collaboration
+            Open to opportunities
           </span>
-          <h1 className={s.heroTitle}>Abhayanth K.</h1>
+          <h1 className={s.heroTitle}>Aryan Patel.</h1>
           <p className={s.heroSub}>
-            I build AI-powered dashboards and data-driven systems using Next.js,
-            TypeScript, Python, and Tableau, turning complex datasets into
-            clear, actionable insights.
+            Full-Stack Developer specialising in React.js, Next.js &amp; scalable
+            backend architecture — integrating AI and turning complex data into
+            high-performance web experiences.
           </p>
           <div className={s.heroBtns}>
             <a href="#projects" className={s.btnPrimary}>
               <ArrowDown size={15} /> View Projects
             </a>
-            <a href="https://github.com/Abhayanthk" target="_blank" rel="noopener noreferrer" className={s.btnGhost}>
+            <a href="https://github.com/aryanpatel99" target="_blank" rel="noopener noreferrer" className={s.btnGhost}>
               <GithubIcon size={15} /> GitHub
             </a>
           </div>
@@ -175,9 +168,11 @@ export default function Home() {
       <section className={s.wrap}>
         <div ref={aboutHdr} className={`${s.secHead} reveal`}>
           <span className={s.label}>Profile</span>
-          <h2 className={s.secTitle}>Engineering Background</h2>
+          <h2 className={s.secTitle}>About Me</h2>
           <p className={s.secSub}>
-            I build AI-powered dashboards and data-driven systems using Next.js, TypeScript, Python, and Tableau, turning complex datasets into clear, actionable insights. Alongside full-stack development, I work extensively with Tableau, spreadsheets, and exploratory data analysis (EDA) to clean, analyze, and visualize data for decision-making.
+            Full-Stack Developer with 300+ problems solved across LeetCode (1400+ rating), Codeforces, and CodeChef.
+            Experienced in integrating AI functionalities and delivering accessible, high-performance web applications
+            using Next.js, TypeScript, Python, and modern DevOps tools.
           </p>
         </div>
 
@@ -185,31 +180,71 @@ export default function Home() {
           <GlowCard>
             <div className={s.cardIcon}><Terminal size={18} /></div>
             <span className={s.cardLabel}>Tech Stack</span>
-            <span className={s.cardBody}>Next.js · TypeScript · Python · Prisma · PostgreSQL</span>
+            <span className={s.cardBody}>Next.js · React · TypeScript · Node.js · Python · PostgreSQL · MongoDB · Prisma</span>
           </GlowCard>
           <GlowCard>
             <div className={s.cardIcon}><Code size={18} /></div>
             <span className={s.cardLabel}>Problem Solving</span>
-            <span className={s.cardBody}>1,900+ problems solved. CF Specialist (1484). LC 547. Bringing strong analytical thinking.</span>
+            <span className={s.cardBody}>300+ problems solved. LeetCode 1400+. Codeforces · CodeChef · HackerRank · HackerEarth.</span>
           </GlowCard>
           <GlowCard>
             <div className={s.cardIcon}><GraduationCap size={18} /></div>
             <span className={s.cardLabel}>Education</span>
-            <span className={s.cardBody}>B.Tech AI (2024–28) · Newton School of Technology · CGPA 8.87</span>
+            <span className={s.cardBody}>B.Tech AI (2024–28) · Newton School of Technology, Rishihood University · CGPA 8.667</span>
           </GlowCard>
         </div>
 
+        {/* ── Internship ── */}
+        <div ref={expRef} className={`reveal`}>
+          <div className={s.secHead} style={{ marginBottom: '20px' }}>
+            <span className={s.label}>Experience</span>
+            <h2 className={s.secTitle}>Internship</h2>
+          </div>
+          <GlowCard>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+              <div className={s.cardIcon} style={{ flexShrink: 0 }}><Briefcase size={18} /></div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+                  <span className={s.cardLabel}>QA Associate — CredoHire</span>
+                  <span style={{ fontSize: '12px', color: '#475569', fontWeight: 500 }}>May 2025 – Aug 2025 · Remote</span>
+                </div>
+                <span className={s.cardBody}>
+                  Collaborated with the engineering team to identify, document, and resolve software defects.
+                  Conducted rigorous functional and UI/UX testing, delivering structured analytical feedback that
+                  directly enhanced product performance. Systematically identified edge cases and optimised testing workflows alongside senior developers.
+                </span>
+                <a href="https://shorturl.at/7TbAw" target="_blank" rel="noopener noreferrer" className={s.projLink} style={{ marginTop: '4px' }}>
+                  View Certificate ↗
+                </a>
+              </div>
+            </div>
+          </GlowCard>
+        </div>
+
+        {/* ── Social Pills ── */}
         <div ref={linksRef} className={`${s.pills} reveal`}>
-          <a href="https://www.linkedin.com/in/abhayanth-k-675905323/" target="_blank" rel="noopener noreferrer" className={s.pill}>
+          <a href="https://www.linkedin.com/in/aryanpatel99/" target="_blank" rel="noopener noreferrer" className={s.pill}>
             <LinkedinIcon size={13} /> LinkedIn
           </a>
-          <a href="https://codeforces.com/profile/Harly24" target="_blank" rel="noopener noreferrer" className={s.pill}>
-            <CodeforcesIcon size={13} /> Codeforces
+          <a href="https://github.com/aryanpatel99" target="_blank" rel="noopener noreferrer" className={s.pill}>
+            <GithubIcon size={13} /> GitHub
           </a>
-          <a href="https://leetcode.com/u/Harly24/" target="_blank" rel="noopener noreferrer" className={s.pill}>
+          <a href="https://leetcode.com/u/ARYAN99_/" target="_blank" rel="noopener noreferrer" className={s.pill}>
             <LeetCodeIcon size={13} /> LeetCode
           </a>
-          <a href="mailto:abhayanth.2024@nst.rishihood.edu.in" className={s.pill}>
+          <a href="https://codeforces.com/profile/aryanpatel6215" target="_blank" rel="noopener noreferrer" className={s.pill}>
+            <CodeforcesIcon size={13} /> Codeforces
+          </a>
+          <a href="https://www.codechef.com/users/neat_foxes_87" target="_blank" rel="noopener noreferrer" className={s.pill}>
+            <CodeChefIcon size={13} /> CodeChef
+          </a>
+          <a href="https://www.hackerrank.com/profile/aryanpatel6215" target="_blank" rel="noopener noreferrer" className={s.pill}>
+            <HackerRankIcon size={13} /> HackerRank
+          </a>
+          <a href="https://www.hackerearth.com/@aryanpatel6215" target="_blank" rel="noopener noreferrer" className={s.pill}>
+            <HackerEarthIcon size={13} /> HackerEarth
+          </a>
+          <a href="mailto:aryan.patel2024@nst.rishihood.edu.in" className={s.pill}>
             <Mail size={13} /> Email
           </a>
         </div>
@@ -220,52 +255,41 @@ export default function Home() {
         <div ref={projHdr} className={`${s.secHead} reveal`}>
           <span className={s.label}>Work</span>
           <h2 className={s.secTitle}>Data Visualization Projects</h2>
-          <p className={s.secSub}>Capstone projects turning complex datasets into actionable insights.</p>
+          <p className={s.secSub}>Capstone projects turning complex datasets into actionable insights — details coming soon.</p>
         </div>
 
-        {/* Project 1 */}
+        {/* Project Placeholder 1 */}
         <article ref={p1} className={`${s.proj} reveal`}>
-          <div className={s.projImg} style={{ background: '#f3f1ec' }}>
-            <Image src="/images/project1.png" alt="Maternal Health Dashboard" fill
-              sizes="(max-width: 768px) 100vw, 1100px" style={{ objectFit: 'contain' }} priority />
-          </div>
+          <ProjectPlaceholder label="Project coming soon" />
           <div className={s.projBody}>
-            <span className={s.projTag}>Healthcare · Capstone</span>
-            <h3 className={s.projTitle}>Maternal & Newborn Health Insights During COVID-19</h3>
+            <span className={s.projTag}>Coming Soon</span>
+            <h3 className={s.projTitle}>Project Title — TBD</h3>
             <p className={s.projDesc}>
-              Analysis of survey-based data from the PdP study across Canada — 10,773 records
-              covering maternal demographics, mental health, pandemic stress & birth outcomes.
+              Details about this project will be added shortly. Check back for a full write-up including methodology, key findings, and interactive dashboard links.
             </p>
-            <a href="https://github.com/Jag2007/SectionC_Group6_Pregnant_Women_COVID19" target="_blank" rel="noopener noreferrer" className={s.projLink}>
-              <GithubIcon size={14} /> View on GitHub
-            </a>
             <div className={s.kpis}>
-              <div className={s.kpi}><span className={s.kpiVal}>29.4%</span><span className={s.kpiLbl}>C-Section Rate</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>51.5</span><span className={s.kpiLbl}>Pandemic Stress /100</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>18.4</span><span className={s.kpiLbl}>PROMIS Anxiety</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>5,389</span><span className={s.kpiLbl}>Cleaned Records</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 1</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 2</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 3</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 4</span></div>
             </div>
           </div>
         </article>
 
-        {/* Project 2 */}
+        {/* Project Placeholder 2 */}
         <article ref={p2} className={`${s.proj} reveal`}>
-          <ImageGallery images={bankImages} />
+          <ProjectPlaceholder label="Project coming soon" />
           <div className={s.projBody}>
-            <span className={s.projTag}>Banking · Direct Marketing</span>
-            <h3 className={s.projTitle}>Bank Marketing Campaign Analytics</h3>
+            <span className={s.projTag}>Coming Soon</span>
+            <h3 className={s.projTitle}>Project Title — TBD</h3>
             <p className={s.projDesc}>
-              Optimising term-deposit conversion via customer, campaign & macro-economic analytics —
-              UCI Portuguese Bank Dataset. Propensity model at 90.8% accuracy.
+              Details about this project will be added shortly. Check back for a full write-up including methodology, key findings, and interactive dashboard links.
             </p>
-            <a href="https://github.com/Lalith0024/Section_C_Group_11_Bank_Marketing_Dataset" target="_blank" rel="noopener noreferrer" className={s.projLink}>
-              <GithubIcon size={14} /> View on GitHub
-            </a>
             <div className={s.kpis}>
-              <div className={s.kpi}><span className={s.kpiVal}>41,176</span><span className={s.kpiLbl}>Contacts Analysed</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>11.27%</span><span className={s.kpiLbl}>Baseline Conversion</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>6.9×</span><span className={s.kpiLbl}>Top-Driver Lift</span></div>
-              <div className={s.kpi}><span className={s.kpiVal}>90.8%</span><span className={s.kpiLbl}>Model Accuracy</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 1</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 2</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 3</span></div>
+              <div className={s.kpi}><span className={s.kpiVal}>—</span><span className={s.kpiLbl}>Metric 4</span></div>
             </div>
           </div>
         </article>
@@ -278,32 +302,52 @@ export default function Home() {
         <p className={s.helloSub}>If you&apos;ve made it this far, let&apos;s talk.</p>
         <CopyEmail />
         <div className={s.socialGrid}>
-          <a href="https://github.com/Abhayanthk" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
+          <a href="https://github.com/aryanpatel99" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
             <span className={s.socialIcon}><GithubIcon size={16} /></span>
             <span className={s.socialLabel}>GITHUB</span>
-            <span className={s.socialHandle}>@Abhayanthk</span>
+            <span className={s.socialHandle}>@aryanpatel99</span>
           </a>
-          <a href="https://www.linkedin.com/in/abhayanth-k-675905323/" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
+          <a href="https://www.linkedin.com/in/aryanpatel99/" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
             <span className={s.socialIcon}><LinkedinIcon size={16} /></span>
             <span className={s.socialLabel}>LINKEDIN</span>
-            <span className={s.socialHandle}>abhayanth-k</span>
+            <span className={s.socialHandle}>aryanpatel99</span>
           </a>
-          <a href="https://codeforces.com/profile/Harly24" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
-            <span className={s.socialIcon}><CodeforcesIcon size={16} /></span>
-            <span className={s.socialLabel}>CODEFORCES</span>
-            <span className={s.socialHandle}>Harly24</span>
-          </a>
-          <a href="https://leetcode.com/u/Harly24/" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
+          <a href="https://leetcode.com/u/ARYAN99_/" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
             <span className={s.socialIcon}><LeetCodeIcon size={16} /></span>
             <span className={s.socialLabel}>LEETCODE</span>
-            <span className={s.socialHandle}>Harly24</span>
+            <span className={s.socialHandle}>ARYAN99_</span>
+          </a>
+          <a href="https://codeforces.com/profile/aryanpatel6215" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
+            <span className={s.socialIcon}><CodeforcesIcon size={16} /></span>
+            <span className={s.socialLabel}>CODEFORCES</span>
+            <span className={s.socialHandle}>aryanpatel6215</span>
+          </a>
+          <a href="https://www.codechef.com/users/neat_foxes_87" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
+            <span className={s.socialIcon}><CodeChefIcon size={16} /></span>
+            <span className={s.socialLabel}>CODECHEF</span>
+            <span className={s.socialHandle}>neat_foxes_87</span>
+          </a>
+          <a href="https://www.hackerrank.com/profile/aryanpatel6215" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
+            <span className={s.socialIcon}><HackerRankIcon size={16} /></span>
+            <span className={s.socialLabel}>HACKERRANK</span>
+            <span className={s.socialHandle}>aryanpatel6215</span>
+          </a>
+          <a href="https://www.hackerearth.com/@aryanpatel6215" target="_blank" rel="noopener noreferrer" className={s.socialCard}>
+            <span className={s.socialIcon}><HackerEarthIcon size={16} /></span>
+            <span className={s.socialLabel}>HACKEREARTH</span>
+            <span className={s.socialHandle}>aryanpatel6215</span>
+          </a>
+          <a href="mailto:aryan.patel2024@nst.rishihood.edu.in" className={s.socialCard}>
+            <span className={s.socialIcon}><Mail size={16} /></span>
+            <span className={s.socialLabel}>EMAIL</span>
+            <span className={s.socialHandle}>aryan.patel2024</span>
           </a>
         </div>
       </section>
 
       {/* ═══ FOOTER ═══ */}
       <footer className={s.footer}>
-        <span>© 2026 Abhayanth K · Built with Next.js</span>
+        <span>© 2026 Aryan Patel · Built with Next.js</span>
       </footer>
     </div>
   );
