@@ -74,8 +74,7 @@ The case study covers:
 - **LeetCode:** [ARYAN99_](https://leetcode.com/u/ARYAN99_/)
 - **Codeforces:** [aryanpatel6215](https://codeforces.com/profile/aryanpatel6215)
 - **CodeChef:** [neat_foxes_87](https://www.codechef.com/users/neat_foxes_87)
-- **HackerRank:** [aryanpatel6215](https://www.hackerrank.com/profile/aryanpatel6215)
-- **HackerEarth:** [aryanpatel6215](https://www.hackerearth.com/@aryanpatel6215)
+
 
 ---
 
