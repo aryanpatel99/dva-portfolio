@@ -1,6 +1,6 @@
 # Aryan Patel — DVA-Focused Portfolio
 
-Live Portfolio: [https://dva-portfolio.vercel.app/](https://dva-portfolio.vercel.app/)
+Live Portfolio: [https://dva-portfolio-beige.vercel.app/](https://dva-portfolio-beige.vercel.app/)
 
 **Full-Stack Developer & Data Visualization Analyst**
 
